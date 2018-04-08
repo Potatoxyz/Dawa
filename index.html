@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jungen</title>
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/Tremula.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <script src="dependency/jquery.js"></script>
+    <script src="dependency/jquery.ba-throttle-debounce.min.js"></script>
+
+    <script src="dependency/jsBezier-0.6.js"></script>
+    <script src="dependency/hammer.js"></script>
+
+
+    <script src="js/tremulaConfig.js"></script>
+    <script src="js/tremulaControls.js"></script>
+
+    <script src="js/Tremula.js"></script>
+</head>
+<body class="doReflect">
+<div class="head" style="height: 60px">
+    <h2><img src="imgs/DawaLogo.png" alt="logo" height="60"></h2>
+</div>
+<div class="tremulaContainer main"></div>
+<div class="footer"><p>&copy;Copyright 2018 by Jungen</p></div>
+<div class="mask-wrap" style="display: none;">
+    <div class="mask">
+        <div class="img-wrap"></div>
+        <div class="des">
+            <h3 class="title"></h3>
+            <ul></ul>
+            <a id="buyLink" href="#" class="button red" target="_blank">BUY IT NOW !</a>
+        </div>
+        <div id="closeModal">
+            <span>X</span>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    const productList=[
+        {id:1,title:'10 x Da.Wa Paper Cups Hot Drinks Disposable Tea Cup Coffee Drink Paper Cup Wedding Party Supplies 250ML (Pink)',link:'https://www.amazon.co.uk/dp/B07B7KZCQ8',des:['This paper cup is available for hot water,need be careful','Useful party tableware supllies for Home,Office,,Parties,','Wedding,Birthday,Christmas,Festival']},
+        {id:2,title:'10x Da.Wa Tree Shaped Hollow Design Wooden Embellishments for Crafting and Decoration',link:'https://www.amazon.co.uk/dp/B071GCGBPJ',des:['Material: Wood. Color: Natural wood color. Size: 12.5cm X12.5cmX0.3cm','New style and Unique design: Tree shaped hollow design wooden chips','Unique wooden hollow chips are perfect materials of DIY, also creative decorations of wedding, party and festival.','Both sides are sanded to a smooth finish ready to paint, decorate, stain, or simply leave plain']},
+        {id:3,title:'Da.Wa La salle de bains de ménage fournit la boîte à savon en bois créative jaune-clair',link:'https://www.amazon.fr/Wa-m%C3%A9nage-fournit-cr%C3%A9ative-jaune-clair/dp/B06Y54Z3J3/ref=sr_1_1?ie=UTF8&qid=1523002588&sr=8-1&keywords=B06Y54Z3J3',des:['Matériel: Bois','Le matériau en bois peut garantir la sécheresse de l\'article, facile à nettoyer','Il y a des encoches au milieu de l\'article pour assurer la sécheresse du savon']},
+        {id:4,title:'Da.Wa Wiederverwendbare Edelstahl Teesieb,11.2x5.5x7.5cm',link:'https://www.amazon.de/Da-Wa-Wiederverwendbare-Edelstahl-Teesieb-11-2x5-5x7-5cm/dp/B01LYMUPIA/ref=sr_1_1?s=diy&ie=UTF8&qid=1523002624&sr=1-1&keywords=B01LYMUPIA',des:['Paket enthalten: 1 x edelstahl teesieb.','Material: aus rostfreiem Edelstahl.','Praktisch und einfach zu reinigen.']},
+        {id:5,title:'Da.Wa Plastic Hollow Flower Vase Brush Storage Pen Pencil Pot Container Desk Organizer Decorative Home Vase (White)',link:'https://www.amazon.com/dp/B07BLSQHWF',des:['Material: plastic','Size：diameter：9cm,height：12.5cm','Spacious storage space, let you use more convenient.','Solid and soft, not easy to break,']},
+        {id:6,title:'Da.Wa 1pcs Flannel Cute Hammock Hanging Bed Nest House Warm Hamster Supplies Nest with Mat for Rat Hamster Parrot Squirrel',link:'https://www.amazon.com/dp/B01N0NRS98',des:['Material：Cotton flannel.Color:multi-colors [colors random shipped].','Size: the bottom of about 2.95inches/7.5cm * high about 3.54inches/9cm (for baby hamsters).','The bottom has fixed a buckle, can fixed the cage, to prevent small pets towing overturned.']},
+        {id:7,title:'Da.Wa Juguete Para Mascotas Muela los Dientes de los Perros TPR La Forma de la Barra Color al Azar',link:'https://www.amazon.es/Wa-Juguete-Mascotas-Dientes-Perros/dp/B06XHNPK8C/ref=sr_1_1/260-0845265-5943160?ie=UTF8&qid=1523190464&sr=8-1&keywords=B06XHNPK8C',des:['Material:caucho,Más seguro y respetuoso con el medio ambiente','Size: the bottom of about 2.95inches/7.5cm * high about 3.54inches/9cm (for baby hamsters).','The bottom has fixed a buckle, can fixed the cage, to prevent small pets towing overturned.']},
+        {id:8,title:'6 X Da.Wa Druckkugelschreiber Kapsel Pillen Modellieren Kugelschreiber Teleskopisch Gesicht Stift',link:'https://www.amazon.de/Wa-Druckkugelschreiber-Modellieren-Kugelschreiber-Teleskopisch/dp/B01LEFP9PU/ref=sr_1_1?s=diy&ie=UTF8&qid=1523002567&sr=1-1&keywords=B01LEFP9PU',des:['Paket einschließlich: 6 stück Kapsel Kugelschreiber ( 6 Farbe, jedes Farbprodukt Verschiffen eins)','Material: Kunststoff ; Größe:2 x 5.5cm; Farbe:Blau,Rot,Gelb,Orange,Lila,Hellgrün','Sehr süß, Kreative und Interessante Geschenk']},
+        {id:9,title:'2X Da.Wa Bolígrafo de Creativo Forma de Cactus el Hermosa Decoración para Oficina y Casa',link:'https://www.amazon.es/Wa-Bol%C3%ADgrafo-Creativo-Hermosa-Decoraci%C3%B3n/dp/B01N5KVQF5/ref=sr_1_1?ie=UTF8&qid=1523190944&sr=8-1&keywords=B01N5KVQF5',des:['El bolígrafo es forma de cactus, lindo y hermoso, también puede ser una bonita decoración para el hogar y la oficina','El material es el plástico, diseño creativo y simple, para el espacio vivo para aumentar color']}
+    ];
+    $(function () {
+        setTimeout(function(){
+            var tremula = tremulaInit();
+            var control=attachDemoControls(tremula);
+            control.mountain();
+        });
+        $('body').removeClass('doReflect');
+    });
+    function closeModal() {
+        $('.mask-wrap ').removeClass('bounceIn').addClass('bounceOut');
+        setTimeout(function () {
+            $('.mask-wrap ').hide();
+        },500);
+    }
+    $('#closeModal').click(function () {
+        closeModal();
+    });
+    window.addEventListener('keydown',function (ev) {
+        if(ev.keyCode==27){
+            closeModal();
+        }
+    });
+    function displayProductDetai(src,id) {
+        $('.mask-wrap ').removeClass('bounceOut').addClass('bounceIn');
+        var wrap=$('.mask-wrap .img-wrap').empty();
+        $('.mask-wrap .des .title').text('');
+        $('.mask-wrap .des ul').empty();
+        $('<img/>').attr('src',src).appendTo(wrap);
+        $('#buyLink').attr('href','#');
+        var obj;
+        for(var i=0;i<productList.length;i++){
+            if(productList[i].id==id){
+                obj=productList[i];
+            }
+        }
+        console.log(obj);
+        if(obj){
+            $('.mask .title').text(obj.title);
+            obj.des.forEach(function (value,index) {
+                $('<li>').text(value).appendTo($('.mask .des ul'));
+            });
+            $('#buyLink').attr('href',obj.link);
+            $('.mask-wrap ').show();
+        }
+    }
+    function tremulaInit(){
+        console.log('starting tremula');
+
+        $tremulaContainer = $('.tremulaContainer');
+
+
+        var tremula = new Tremula();
+        var config = tremulaConfigs.default.call(tremula);
+
+        tremula.init($tremulaContainer,config,this);
+
+        var doScrollEvents = function(o){
+            if(o.scrollProgress>.7){
+                if(!tremula.cache.endOfScrollFlag){
+                    tremula.cache.endOfScrollFlag = true;
+                    console.log('END OF SCROLL!')
+                }
+            }
+        }//doScrollEvents()
+
+        tremula.setOnChangePub(doScrollEvents);
+
+        return tremula;
+    }
+</script>
+</html>
