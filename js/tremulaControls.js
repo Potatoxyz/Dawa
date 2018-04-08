@@ -384,9 +384,9 @@ function attachDemoControls(tremula){
 			{id:4,imgUrl:'./imgs/4.jpg'},
 			{id:5,imgUrl:'./imgs/5.jpg'},
 			{id:6,imgUrl:'./imgs/6.jpg'},
-			{id:6,imgUrl:'./imgs/7.jpg'},
-			{id:6,imgUrl:'./imgs/8.jpg'},
-			{id:6,imgUrl:'./imgs/9.jpg'},
+			{id:7,imgUrl:'./imgs/7.jpg'},
+			{id:8,imgUrl:'./imgs/8.jpg'},
+			{id:9,imgUrl:'./imgs/9.jpg'}
 		];
         tremula.appendData(rs,tremula.dataAdapters.JudyItem);
 		// var dataUrl = 'http://ws-decor.art.com/api/decorProductSearch?engine=judy&pageNumber=1&numProducts=200&rsLimit=1000&moodId=undefined&paletteHex=dfdd78-695d87&statusMsg=0.632s%3A+200+of+1000+returned&refinements=&keyword=abstract&includePoster=true&includeArt=true&includeDecorProducts=false&totalRetrieved=0&getDataFromThisUrl=null&totalFound=1000&pageReturned=4';
