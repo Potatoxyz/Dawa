@@ -114,18 +114,25 @@ div.mask-wrap .mask .img-wrap img{
 }
 div.head{
 	background-color: #E8EEE6;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    left: 0;
 }
 div.footer{
 	position: fixed;
 	bottom: 0;
 	height: 60px;
-	margin-left: 30px;
+
+    background: #E8EEE6;
+    width: 100%;
 }
 div.footer p{
 	line-height: 60px;
-	text-align: center;
+	text-align: left;
+    margin: 0 0 0 30px;
 	font-size: 12px;
-	margin: 0;
 }
 /* Tremula Styles  */
 
@@ -161,6 +168,7 @@ div.footer p{
 	top:-60px;
 	left:0;
 	z-index: 1;
+    background: #9f9072;
 }
 
 
